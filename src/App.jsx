@@ -2,13 +2,19 @@ import './App.css'
 import MyClock from './02/MyClock'
 import MyDiv1 from './03/MyDiv1'
 import MyList from './04/MyList'
+import MyToggle from './05/MyToggle'
+import Header from './Header'
+import Footer from './Footer'
+import Lotto from './06/Lotto'
 
 function App() {
    return (
-    <div className='w-screen h-screen flex flex-col justify-center items-center p-20'>
-      {/* <MyDiv1 /> */}
-      {/* <MyClock /> */}
-      <MyList />
+    <div className='w-full h-screen flex flex-col overflow-y-hidden'>
+      <Header />
+      <main className='container mx-auto flex flex-col flex-grow overflow-y-auto'>
+        <Lotto/>
+      </main>
+      <Footer />      
     </div>
   )
 }

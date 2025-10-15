@@ -16,10 +16,26 @@ export default function MyListItem({titleData, imgUrlData, contextData}/* {itemN
 
     const handleClick=()=>{
         console.log(`${title} click`);
-        cnt++;
-        setScnt(scnt+1);
-        setDoubleCnt(doubleCnt+(2*cnt));
-        console.log(`${scnt}`);
+        cnt = scnt+hatecnt+1;
+        // cnt++;
+        // 밑에 setScnt에서 호출하는 scnt는 모두 현재 상태의 동일한 scnt.
+        // 함수 내에서 scnt는 고정. 해결하기 위해서 setScnt(()=>{})처럼 내부에서 함수형으로 사용. 람다식
+        // REACT는 성능 위해 함수 묶어서 실행?
+        setScnt(scnt+1); // scnt 가 0이면 
+        setScnt(scnt+1); // 이 scnt도 0이고
+        setScnt(scnt+1); // 이 scnt도 0임
+        //setDoubleCnt(doubleCnt+(2*cnt));
+        console.log(`${cnt}`);
+        
+    };
+
+    const handleHateClick=()=>{
+        console.log(`${title} click`);
+        cnt = scnt+hatecnt+1;
+        // cnt++;
+        
+        //setDoubleCnt(doubleCnt+(2*cnt));
+        console.log(`${cnt}`);
         setHatecnt(hatecnt+1);
     };
 
@@ -40,10 +56,10 @@ export default function MyListItem({titleData, imgUrlData, contextData}/* {itemN
                 <div className='h-1/5 w-full flex flex-row justify-end p-3'>
                     <div className='font-bold h-full cursor-pointer hover:text-fuchsia-800'
                         onClick={handleClick}> 
-                        {doubleCnt}❤ 좋아요 {scnt}
+                        ❤ 좋아요 {scnt}
                     </div>
                     <div className='font-bold h-full cursor-pointer hover:text-fuchsia-800'
-                        onClick={handleClick}> 
+                        onClick={handleHateClick}> 
                         ❤ 싫어요 {hatecnt}
                     </div>
                 </div>
