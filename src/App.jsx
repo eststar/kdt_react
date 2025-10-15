@@ -3,8 +3,8 @@ import MyClock from './02/MyClock'
 import MyDiv1 from './03/MyDiv1'
 import MyList from './04/MyList'
 import MyToggle from './05/MyToggle'
-import Header from './Header'
-import Footer from './Footer'
+import Header from './components/Header'
+import Footer from './components/Footer'
 import Lotto from './06/Lotto'
 
 function App() {

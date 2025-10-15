@@ -1,11 +1,9 @@
 import React from 'react'
 
-export default function LottoBall() {
+export default function LottoBall({lottoNum}) {
   return (
-    <div>
-      <div className='h-20 w-20 rounded-xl bg-amber-900'>
-
-      </div>
+    <div className='h-20 w-20 rounded-full bg-amber-900'>
+      {(lottoNum == 0)? '+' : lottoNum}
     </div>
   )
 }
