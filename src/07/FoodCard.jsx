@@ -18,16 +18,19 @@ export default function FoodCard({infoData}) {
   };
 
   return (
-    <div className="p-5 h-full w-full flex flex-row justify-start items-start border-solid border-gray-200 border-5">
-      <div className="mr-5">
+    <div className="p-5 h-full w-full flex flex-row justify-start items-start border-solid border-gray-200 border-5 space-x-6">
+      <div>
         <img src={category[infoData["구분"]]} alt={category[infoData["구분"]]}/>
         </div>
       <div className="flex flex-col justify-between items-start">        
         <h1 className="font-bold text-xl">{infoData["사업장명"]}</h1>
         <h2 className="font-bold text-lg">{infoData["운영주체명"]}</h2>
         <p>{infoData["사업장 소재지"]}</p>
-        <div className="w-full h-5 bg-gray-500 text-white">
-          {infoData["연락처(대표번호)"]}{infoData["팩스번호"]}
+        <div className="w-full h-10 bg-gray-500 text-white cursor-pointer">
+          <ul className="w-full h-full flex justify-center items-center space-x-6">
+            <li>{infoData["연락처(대표번호)"]}</li>
+            <li>{infoData["팩스번호"]}</li>
+          </ul>          
         </div>
       </div>
        
