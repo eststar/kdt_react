@@ -26,11 +26,13 @@ export default function FoodCard({infoData}) {
         <h1 className="font-bold text-xl">{infoData["사업장명"]}</h1>
         <h2 className="font-bold text-lg">{infoData["운영주체명"]}</h2>
         <p>{infoData["사업장 소재지"]}</p>
-        <div className="w-full h-10 bg-gray-500 text-white cursor-pointer">
-          <ul className="w-full h-full flex justify-center items-center space-x-6">
+        <div className="w-full h-10 bg-gray-500 text-white cursor-pointer" onClick={showTelNum}>
+          {isActive &&
+            <ul className="w-full h-full flex justify-center items-center space-x-6">
             <li>{infoData["연락처(대표번호)"]}</li>
             <li>{infoData["팩스번호"]}</li>
           </ul>          
+          }
         </div>
       </div>
        
