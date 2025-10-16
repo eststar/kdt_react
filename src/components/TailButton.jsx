@@ -14,7 +14,7 @@ const btStyles = {
 };
 
 export default function TailButton({ bColor, caption, onHandle }) {  
-  const btColorCss = `${btStyles[bColor].base} ${btStyles[bColor].hover} rounded text-white w-20 h-10`;
+  const btColorCss = `${btStyles[bColor].base} ${btStyles[bColor].hover} rounded text-white w-50 h-10`;
 
   return (
     <button className={btColorCss} onClick={onHandle}>{caption}</button>
