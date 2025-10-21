@@ -1,6 +1,6 @@
 import Busan from "../assets/market/busan.png"
-import Bank from "../assets/market/busan.png"
-import Market from "../assets/market/busan.png"
+import Bank from "../assets/market/bank.png"
+import Market from "../assets/market/market.png"
 import { useState } from "react"
 
 const category = {
@@ -19,9 +19,10 @@ export default function FoodCard({infoData}) {
 
   return (
     <div className="p-5 h-full w-full flex flex-row justify-start items-start border-solid border-gray-200 border-5 space-x-6">
-      <div>
-        <img src={category[infoData["구분"]]} alt={category[infoData["구분"]]}/>
-        </div>
+      <div className="h-full w-1/3">
+        <img src={category[infoData["구분"]]} alt={category[infoData["구분"]]}
+          className="w-full h-full" />
+      </div>
       <div className="flex flex-col justify-between items-start">        
         <h1 className="font-bold text-xl">{infoData["사업장명"]}</h1>
         <h2 className="font-bold text-lg">{infoData["운영주체명"]}</h2>
