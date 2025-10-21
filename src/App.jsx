@@ -15,6 +15,7 @@ function App() {
       <Header />
       <main className='container mx-auto flex flex-col flex-grow overflow-y-auto'>
         <MyClock />
+        {/* <FoodMain /> */}
       </main>
       <Footer />      
     </div>
