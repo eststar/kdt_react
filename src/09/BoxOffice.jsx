@@ -10,11 +10,8 @@ export default function BoxOffice() {
 
     const baseUrl = "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?";
 
-    //처음 생성시 어제 날짜 받아오기
-        
-    //오늘 날짜 연월일     
-    
-    //선택할때마다 날짜별로 데이터 받아오기
+    //처음 생성시 어제 날짜 받아오기    
+    //어제 날짜 연월일    
     const getYesterday = () => {
         const date = new Date();
         let year = date.getFullYear();
@@ -22,8 +19,9 @@ export default function BoxOffice() {
         let day = date.getDate();
         return `${year}-${month}-${day - 1}`;
     };
-    const [selDate, setSelDate] = useState(getYesterday());
+    //const [selDate, setSelDate] = useState(getYesterday());
 
+    //선택할때마다 날짜별로 데이터 받아오기
     //날짜 변경시 변경된 target 받아와서 value 이용해 변경한 날짜 기준 박스오피스 데이터 요청 fetch
     const handleSelectDate = (e) => {
         let dt = e.target.value.replaceAll('-','');
