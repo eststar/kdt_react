@@ -8,14 +8,14 @@ import Footer from './components/Footer'
 import Lotto from './06/Lotto'
 import FoodMain from './07/FoodMain'
 import MyEffect from './08/MyEffect'
+import BoxOffice from './09/BoxOffice'
 
 function App() {
    return (
     <div className='w-full h-screen flex flex-col overflow-y-hidden'>
       <Header />
       <main className='container mx-auto flex flex-col flex-grow overflow-y-auto'>
-        <MyClock />
-        {/* <FoodMain /> */}
+        <BoxOffice />        
       </main>
       <Footer />      
     </div>
