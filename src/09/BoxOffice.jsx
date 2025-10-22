@@ -6,8 +6,7 @@ const apiKey = import.meta.env.VITE_MV_API_KEY;
 export default function BoxOffice() {
     const [movieData, setMovieData] = useState([]);
     const [trTags, setTrTags] = useState();
-    const [movieInfo, setMovieInfo] = useState();
-    
+    const [movieInfo, setMovieInfo] = useState();    
 
     const baseUrl = "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?";
 
@@ -25,6 +24,7 @@ export default function BoxOffice() {
     };
     const [selDate, setSelDate] = useState(getYesterday());
 
+    //날짜 변경시 변경된 target 받아와서 value 이용해 변경한 날짜 기준 박스오피스 데이터 요청 fetch
     const handleSelectDate = (e) => {
         let dt = e.target.value.replaceAll('-','');
         
@@ -43,16 +43,18 @@ export default function BoxOffice() {
             .catch((err => console.log(err)));
     };
 
-    const rankChange = (rankInten) => (rankInten == 0) ? "-" : (rankInten > 0) ? <span className="flex flex-row justify-center items-start">{Math.abs(rankInten)} <IoMdArrowDropup className="text-red-600" /></span>
-        : <span className="flex flex-row justify-center items-start">{Math.abs(rankInten)}<IoMdArrowDropdown className="text-blue-600" /></span>;
-
     //컴포넌트 최초 생성시 한번 실행
     useEffect(() => {
-        setSelDate(getYesterday());
-        const curDate = selDate.replaceAll('-', '');
+        // setSelDate(getYesterday());
+        const curDate = getYesterday().replaceAll('-', '');
         getFetchData(curDate);
     }, []);
 
+    //랭크 변동 값에 따라 위아래화살표
+    const rankChange = (rankInten) => (rankInten == 0) ? "-" : (rankInten > 0) ? <span className="flex flex-row justify-center items-start">{Math.abs(rankInten)} <IoMdArrowDropup className="text-red-600" /></span>
+        : <span className="flex flex-row justify-center items-start">{Math.abs(rankInten)}<IoMdArrowDropdown className="text-blue-600" /></span>;
+    
+    //박스오피스 데이터 fetch한거 받아오면 실행
     useEffect(() => {
         setTrTags(movieData.map((el) =>
             <tr key={el.movieCd} className="hover:bg-indigo-400/50 even:bg-white odd:bg-gray-50" onClick={() => selectChart(el)}>
@@ -74,6 +76,7 @@ export default function BoxOffice() {
         ));
     }, [movieData]);   
 
+    //차트 클릭하면 추가 정보 출력
     const selectChart = (movie) => {
         if (movie !== null)
             setMovieInfo(
