@@ -9,13 +9,16 @@ import Lotto from './06/Lotto'
 import FoodMain from './07/FoodMain'
 import MyEffect from './08/MyEffect'
 import BoxOffice from './09/BoxOffice'
+import Traffic from './10/Traffic'
+import MyRef from './11/MyRef'
+
 
 function App() {
    return (
     <div className='w-full h-screen flex flex-col overflow-y-hidden'>
       <Header />
       <main className='container mx-auto flex flex-col flex-grow overflow-y-auto'>
-        <BoxOffice />        
+        <MyRef />        
       </main>
       <Footer />      
     </div>

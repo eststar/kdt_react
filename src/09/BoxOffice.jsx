@@ -30,15 +30,28 @@ export default function BoxOffice() {
     };
 
     //데이터 요청 fetch 함수
-    const getFetchData = (day) => {
+    // const getFetchData = (day) => {
+    //     let url = `${baseUrl}key=${apiKey}&targetDt=${day}`;        
+
+    //     fetch(url).then((resp) => resp.json())
+    //         .then((data) => {
+    //             const boxOfficeData = data.boxOfficeResult.dailyBoxOfficeList;
+    //             setMovieData(boxOfficeData);
+    //         })
+    //         .catch((err => console.log(err)));
+    // };
+
+    //원래 fetch 하면 결과가 돌아와야 뭔가 할 수 있음.
+    //await 사용하면 해당 위치 요청의 결과가 돌아올때까지 다음줄을 실행하지 않고. promise가 대기함.
+    //await 사용하려면 함수 선언을 async 선언해야함
+    //사용하지 않으면 다음거 실행하고 있음.
+    const getFetchData = async (day) => {
         let url = `${baseUrl}key=${apiKey}&targetDt=${day}`;        
 
-        fetch(url).then((resp) => resp.json())
-            .then((data) => {
-                const boxOfficeData = data.boxOfficeResult.dailyBoxOfficeList;
-                setMovieData(boxOfficeData);
-            })
-            .catch((err => console.log(err)));
+        const resp = await fetch(url);
+        const data = await resp.json();
+        setMovieData(data.boxOfficeResult.dailyBoxOfficeList);
+       
     };
 
     //컴포넌트 최초 생성시 한번 실행
