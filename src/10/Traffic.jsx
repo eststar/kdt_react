@@ -39,12 +39,12 @@ export default function Traffic() {
         getFetchData();
     }, []);
 
-    //데이터 받아와졌으면 
+    //데이터 받아와졌으면 대분류 체크
     useEffect(() => {
 
         if (tData.length <= 0)
             return;
-        // console.log(tData);
+        
         const allCat = tData.map(el => el["사고유형대분류"]);
         const catData = [...new Set(allCat)];
 
@@ -57,11 +57,11 @@ export default function Traffic() {
         if (tData.length <= 0)
             return;
         const filteredData = tData.filter(el => el["사고유형대분류"] === selectedCat)
-        const subCat = filteredData.map(el => el["사고유형중분류"])
+        const subCat = filteredData.map(el => el["사고유형"])
         const subCatData = [...new Set(subCat)];
-
+        // console.log(subCatData);
         setSubCategoryData(subCatData);
-        setSelectedData(filteredData);
+        setSelectedData([]);
     }, [selectedCat]);
 
     //중분류 선택하면 사고건수, 사망자수, 중상자수, 경상자수, 부상신고자수
@@ -71,7 +71,7 @@ export default function Traffic() {
 
         const filteredData = tData.filter(el =>
             el["사고유형대분류"] === selectedCat
-            && el["사고유형중분류"] === selectedSubCat
+            && el["사고유형"] === selectedSubCat
         );
 
         setSelectedData(filteredData);
@@ -83,15 +83,17 @@ export default function Traffic() {
         if (selectedData.length <= 0)
             return;
         setshowData(() =>
-            selectedData.map((el, idx) => <TrafficInfo infoData={el} key={idx} />)
+            selectedData.map((el) => <TrafficInfo infoData={el} key={el["도로종류"]} />)
         );
     }, [selectedData]);
 
     return (
         <div className="flex flex-col justify-start items-start mt-10">
-            {categoryData && <TrafficNav title="교통사고 대분류" data={categoryData} selected={setSelectedCat} />}
-            {subCategoryData && <TrafficNav title="교통사고 중분류" data={subCategoryData} selected={setSelectedSubCat} />}
+            {categoryData && <TrafficNav title="사고유형대분류" data={categoryData} setSelected={setSelectedCat} selected={selectedCat} />}
+            {subCategoryData && <TrafficNav title="사고유형" data={subCategoryData} setSelected={setSelectedSubCat} selected={selectedSubCat} />}
             {showData}
+            {/* {selectedData && 
+                selectedData.map((el, idx) => <TrafficInfo infoData={el} key={idx} />)} */}
         </div>
     )
 }

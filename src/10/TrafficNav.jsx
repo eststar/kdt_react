@@ -1,9 +1,9 @@
 import TailButton from "../components/TailButton";
 
-export default function TrafficNav({ title, data, selected}) {
-    
-    const makeBts = ()=>data.map(el =>
-                        <TailButton bColor="blue" caption={el} onHandle={() => selected(el)} key={el}/>);
+export default function TrafficNav({ title, data, setSelected, selected}) {
+        
+    const makeBts = ()=>data.map(item =>
+                        <TailButton bColor={(item == selected)? "orange":"blue"} caption={item} onHandle={() => setSelected(item)} key={item}/>);
 
     return (
         <div className="w-full flex flex-row justify-between items-center mb-5">
