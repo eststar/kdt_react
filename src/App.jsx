@@ -11,6 +11,8 @@ import MyEffect from './08/MyEffect'
 import BoxOffice from './09/BoxOffice'
 import Traffic from './10/Traffic'
 import MyRef from './11/MyRef'
+import RefCalc from './12/RefCalc'
+import TourGallery from './13/TourGallery'
 
 
 function App() {
@@ -18,7 +20,7 @@ function App() {
     <div className='w-full h-screen flex flex-col overflow-y-hidden'>
       <Header />
       <main className='container mx-auto flex flex-col flex-grow overflow-y-auto'>
-        <MyRef />        
+        <TourGallery />        
       </main>
       <Footer />      
     </div>
