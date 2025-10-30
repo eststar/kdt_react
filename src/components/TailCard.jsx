@@ -1,14 +1,14 @@
 // import Market from "../assets/market/market.png"
 
-export default function TailCard({ data }) {
+export default function TailCard({ data, infos }) {
   // console.log(data.galSearchKeyword.split(","));  
 
   const keyTags = (data) => {
     if (!data)
       return;
-    const keywordArr = data.galSearchKeyword.split(",");
+    // const keywordArr = data.galSearchKeyword.split(",");
 
-    return keywordArr.map((el) => <div key={el.replaceAll(" ", "")}
+    return infos.map((el) => <div key={el.replaceAll(" ", "")}
       className="py-1 px-2 rounded-2xl bg-gray-200">{el.trim()}</div>);
   };
 
