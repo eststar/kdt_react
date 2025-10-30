@@ -1,7 +1,8 @@
 import TailButton from "../components/TailButton";
 import TailCard from "../components/TailCard"
-import { useState, useEffect, useRef } from "react"
+import TailInput from "../components/TailInput";
 
+import { useState, useEffect, useRef } from "react"
 
 const apiKey = import.meta.env.VITE_PUBLICDATA_API_KEY;
 export default function TourGallery() {
@@ -20,16 +21,17 @@ export default function TourGallery() {
         + "?pageNo=1&resultType=json";
 
     //fetch 함수
-    const getFetchData = async () => {               
+    const getFetchData = async () => {
         const url = `${baseUrl}&numOfRows=${numRows ?? 1}&serviceKey=${apiKey}`;
-        console.log(url);  
-
+        
         try {
             const resp = await fetch(url);
             const data = await resp.json();
             setData(data);
-            if(!numRows)
-                setNumRows(data.totalCount); //데이터 전송 받았으면 받을수 있는 전체 데이터 수 확인
+            if (!numRows)
+                setNumRows(data.getFestivalKr.totalCount); //데이터 전송 받았으면 받을수 있는 전체 데이터 수 확인
+            else
+                setPData(data.getFestivalKr.item);
         } catch (error) {
             console.log(error);
         }
@@ -37,35 +39,45 @@ export default function TourGallery() {
 
     //최초 생성시 전체 데이터 일단 받아옴
     useEffect(() => {
-        getFetchData();
-        // setPData(()=> data.item ?? []);
-        // setNumRows(()=> data.totalCount ?? 1);
+        getFetchData();        
     }, []);
-    
+
     //받아올 데이터 수 결정 되었으면 다시 fetch
     useEffect(() => {
-        if(!numRows || !data)
+        if (!numRows || !data || data.length <= 0)
             return;
+        // console.log(numRows);
         getFetchData();
-        setPData(data.item);        
+        // setPData(data.getFestivalKr.item);
+        
         searchRef.current.focus();
     }, [numRows]);
 
-    //정리된 데이터 있으면 키워드 받아서 그것만 보여주는 함수 만들기. 
-    // useEffect(()=>{
-    //     if(!data || !pData)
-    //         return;
-    //     searchRef.current.focus();           
-    // },[pData]);
-
     const handleSearch = (e) => {
         e.preventDefault();
+        
         if (searchRef.current.value == "") {
             alert("키워드를 입력하세요");
             searchRef.current.focus();
             return;
         }
-        setCardTags(pData.map((item)=> <TailCard data={item} infos={item.TRFC_INFO} key={item.UC_SEQ} />));   
+        if(!pData || pData.length <= 0){
+            alert("데이터 받는중...");
+            searchRef.current.focus();
+            return;
+        }
+        const filteredData = pData.filter((item) => {
+            
+            for (let val of Object.values(item)) {
+                if (isNaN(val) && val.includes(searchRef.current.value)){
+                    console.log(val);
+                    return true;
+                }
+            }
+        });
+        
+        setCardTags(filteredData.map((item) => <TailCard url={item.MAIN_IMG_THUMB} title={item.TITLE}
+            subtitle={item.TRFC_INFO} infos={item.USAGE_DAY_WEEK_AND_TIME.split(",")} key={item.UC_SEQ} />));
     };
 
     const handleClear = (e) => {
@@ -77,17 +89,20 @@ export default function TourGallery() {
 
     return (
         <div className="w-full h-full flex flex-col justify-start items-center gap-5">
-            <div className="w-4/5 shadow-xl/30 flex flex-col justify-start items-center p-5 gap-5 bg-emerald-100">
+            <div className="w-4/5 shadow-xl/30 flex flex-col justify-center items-center p-5 gap-5 bg-emerald-100">
                 <h1 className="text-xl font-bold">부산광역시 부산축제정보 서비스</h1>
-                <form className="flex flex-row justify-center items-center space-x-2 w-full">
-                    <input placeholder="검색키워드" type="text" name="location" ref={searchRef} className="w-1/3 border-2 border-solid border-indigo-400 px-4 py-1" />
-                    <TailButton bColor="blue" caption="검색" onHandle={handleSearch} />
-                    <TailButton bColor="blue" caption="취소" onHandle={handleClear} />
+                <form className="grid grid-cols-3 gap-2 w-full max-w-lg mx-auto">
+                    <div className="col-span-2">
+                        <TailInput placeholder="검색키워드" type="text" name="location" ref={searchRef} />
+                    </div>
+                    <div className="flex gap-2">
+                        <TailButton bColor="blue" caption="검색" onHandle={handleSearch} />
+                        <TailButton bColor="blue" caption="취소" onHandle={handleClear} />
+                    </div>
                 </form>
             </div>
             <div className="w-4/5 h-3/4 overflow-y-auto grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
-                {cardTags}
-                {/* {pData.map((item) => <TailCard data={item} key={item.galContentId} />)} */}
+                {cardTags}                
             </div>
         </div>
     )

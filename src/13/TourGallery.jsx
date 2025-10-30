@@ -1,6 +1,9 @@
 import TailButton from "../components/TailButton";
 import TailCard from "../components/TailCard"
+import TailInput from "../components/TailInput";
+
 import { useState, useEffect, useRef } from "react"
+
 
 // "galContentId": "2586952",
 // "galContentTypeId": "17",
@@ -78,17 +81,22 @@ export default function TourGallery() {
 
     return (
         <div className="w-full h-full flex flex-col justify-start items-center gap-5">
-            <div className="w-4/5 shadow-xl/30 flex flex-col justify-start items-center p-5 gap-5 bg-emerald-100">
+            <div className="w-4/5 shadow-xl/30 flex flex-col justify-center items-center p-5 gap-5 bg-emerald-100">
                 <h1 className="text-xl font-bold">한국관광공사 관광사진 정보</h1>
-                <form className="flex flex-row justify-center items-center space-x-2 w-full">
-                    <input placeholder="검색키워드" type="text" name="location" ref={searchRef} className="w-1/3 border-2 border-solid border-indigo-400 px-4 py-1" />
-                    <TailButton bColor="blue" caption="검색" onHandle={handleSearch} />
-                    <TailButton bColor="blue" caption="취소" onHandle={handleClear} />
+                <form className="grid grid-cols-3 gap-2 w-full max-w-lg mx-auto">
+                    <div className="col-span-2">
+                        <TailInput placeholder="검색키워드" type="text" name="location" ref={searchRef} />
+                    </div>
+                    <div className="flex gap-2">
+                        <TailButton bColor="blue" caption="검색" onHandle={handleSearch} />
+                        <TailButton bColor="blue" caption="취소" onHandle={handleClear} />
+                    </div>
                 </form>
             </div>
             <div className="w-4/5 h-3/4 overflow-y-auto grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
                 {/* {cardTags} */}
-                {pData.map((item) => <TailCard data={item} infos={item.galSearchKeyword.split(",")} key={item.galContentId} />)}
+                {pData.map((item) => <TailCard url={item.galWebImageUrl} title={item.galTitle} 
+                    subtitle={item.galPhotographyLocation} infos={item.galSearchKeyword.split(",")} key={item.galContentId} />)}            
             </div>            
         </div>
     )
