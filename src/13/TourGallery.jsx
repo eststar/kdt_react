@@ -2,43 +2,94 @@ import TailButton from "../components/TailButton";
 import TailCard from "../components/TailCard"
 import { useState, useEffect, useRef } from "react"
 
+// "galContentId": "2586952",
+// "galContentTypeId": "17",
+// "galTitle": "서울빛초롱축제",
+// "galWebImageUrl": "http://tong.visitkorea.or.kr/cms2/website/52/2586952.jpg",
+// "galCreatedtime": "20190109152342",
+// "galModifiedtime": "20190109152354",
+// "galPhotographyMonth": "201811",
+// "galPhotographyLocation": "서울특별시 종로구",
+// "galPhotographer": "라이브스튜디오",
+// "galSearchKeyword": "서울빛초롱축제, 서울특별시 종로구, 2018 하반기 기획사진, 청계천 야경, 서울 등 축제, 서울 축제"
+
 const apiKey = import.meta.env.VITE_PUBLICDATA_API_KEY;
 export default function TourGallery() {
-    const baseUrl = "https://apis.data.go.kr/B551011/PhotoGalleryService1/gallerySearchList1"
-        +"?numOfRows=50&pageNo=1&MobileOS=ETC&MobileApp=AppTest&arrange=A"
-        +"&_type=json"+"&keyword=%EC%84%9C%EC%9A%B8%20%EC%95%BC%EA%B2%BD%20%EC%B6%95%EC%A0%9C";
+    // /photo-api -> https://apis.data.go.kr/B551011/PhotoGalleryService1/gallerySearchList1
+    const baseUrl = "/photo-api/gallerySearchList1"
+        + "?numOfRows=50&pageNo=1&MobileOS=ETC&MobileApp=AppTest&arrange=A"
+        + "&_type=json";
 
-    const [pData, setPData] = useState();
-    const locRef = useRef();
+    const [pData, setPData] = useState([]);
+    const [cardTags, setCardTags] = useState([]);
+    // const [searchWord, setSearchWord] = useState();
+    const searchRef = useRef("");
 
-    const getFetchData = async ()=>{
-        const url = `${baseUrl}&serviceKey=${apiKey}`;
-        console.log("url" , url)
-        const resp = await fetch(url);
-        const data = await resp.json();
-        // console.log(data.response.body.items.item);
-        console.log(resp)
-        setPData(data.response.body.items.item);
+    const getFetchData = async () => {
+        if(searchRef.current.value == "")
+            return;
+        
+        const url = `${baseUrl}&serviceKey=${apiKey}&keyword=${encodeURI(searchRef.current.value)}`;
+        // console.log("url" , url)
+        try {
+            const resp = await fetch(url);
+            const data = await resp.json();            
+
+            setPData(data.response.body.items.item);
+        } catch (error) {
+            console.log(error);
+        }
     };
-    useEffect(()=>{
-        getFetchData();
-        // console.log(pData);
 
+    useEffect(() => {
+        searchRef.current.focus();
     }, []);
+
+    // const createCards = () => pData.map((item) => <TailCard data={item} key={item.galContentId} />);
+
+    // useEffect(() => {
+    //     setCardTags(pData && createCards());
+    // }, [pData]);
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        if(searchRef.current.value == ""){
+            alert("키워드를 입력하세요");
+            searchRef.current.focus();
+            return;
+        }        
+        
+        getFetchData();
+        // setSearchWord(searchRef.current.value);
+    };
+
+    // useEffect(() => {
+    //     console.log(searchRef.current.value)
+    //     getFetchData();
+    // }, [searchRef.current.value]);
+
+    const handleClear = (e) => {
+        e.preventDefault();
+        searchRef.current.value = "";
+        setPData([]);
+        searchRef.current.focus();
+        // setSearchWord(searchRef.current.value ?? "");
+    };
+
     return (
         <div className="w-full h-full flex flex-col justify-start items-center gap-5">
-            <div className="w-4/5 shadow-xl/30 flex flex-col justify-start items-center p-5 gap-5">
+            <div className="w-4/5 shadow-xl/30 flex flex-col justify-start items-center p-5 gap-5 bg-emerald-100">
                 <h1 className="text-xl font-bold">한국관광공사 관광사진 정보</h1>
                 <form className="flex flex-row justify-center items-center space-x-2 w-full">
-                    <input type="text" name="location" ref={locRef} className="w-1/3 border-2 border-solid border-indigo-400"/>
-                    <TailButton bColor="blue" caption="확인" onHandle={()=>{}} />
-                    <TailButton bColor="blue" caption="취소" onHandle={()=>{}} />
+                    <input placeholder="검색키워드" type="text" name="location" ref={searchRef} className="w-1/3 border-2 border-solid border-indigo-400 px-4 py-1" />
+                    <TailButton bColor="blue" caption="검색" onHandle={handleSearch} />
+                    <TailButton bColor="blue" caption="취소" onHandle={handleClear} />
                 </form>
             </div>
-            <div className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-                <TailCard />
-            </div>
-            
+            <div className="w-4/5 h-3/4 overflow-y-auto grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
+                {/* {cardTags} */}
+                {pData.map((item) => <TailCard data={item} key={item.galContentId} />)}
+            </div>            
         </div>
     )
 }

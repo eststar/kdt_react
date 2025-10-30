@@ -1,17 +1,27 @@
-import Market from "../assets/market/market.png"
+// import Market from "../assets/market/market.png"
 
-export default function TailCard() {
+export default function TailCard({ data }) {
+  // console.log(data.galSearchKeyword.split(","));  
+
+  const keyTags = (data) => {
+    if (!data)
+      return;
+    const keywordArr = data.galSearchKeyword.split(",");
+
+    return keywordArr.map((el) => <div key={el.replaceAll(" ", "")}
+      className="py-1 px-2 rounded-2xl bg-gray-200">{el.trim()}</div>);
+  };
+
+
   return (
-    <div className="w-full h-full shadow-xl/30">
-      <img src={Market} alt="" className="w-full" />
-      <div className="w-full mb-10">
-        <h2 className="text-lg font-bold">위치</h2>
-        <p className="">주소</p>
+    <div className="max-w-sm shadow-xl/30 flex flex-col">
+      <img src={data.galWebImageUrl} alt="" className="w-full" />
+      <div className="w-full mb-10 p-5">
+        <h2 className="text-lg font-bold">{data.galTitle}</h2>
+        <p className="">{data.galPhotographyLocation}</p>
       </div>
-      <div className="flex flex-wrap space-x-2">
-        <div className="py-2 px-1 rounded-2xl bg-gray-200">키워드</div>
-        <div className="py-2 px-1 rounded-2xl bg-gray-200">키워드</div>
-        <div className="py-2 px-1 rounded-2xl bg-gray-200">키워드</div>
+      <div className="p-5 flex flex-wrap gap-2">
+        {keyTags(data)}
       </div>
     </div>
   )

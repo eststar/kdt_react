@@ -13,14 +13,14 @@ import Traffic from './10/Traffic'
 import MyRef from './11/MyRef'
 import RefCalc from './12/RefCalc'
 import TourGallery from './13/TourGallery'
-
+import FestivalGallery from './14/FestivalGallery'
 
 function App() {
    return (
     <div className='w-full h-screen flex flex-col overflow-y-hidden'>
       <Header />
       <main className='container mx-auto flex flex-col flex-grow overflow-y-auto'>
-        <TourGallery />        
+        <FestivalGallery />        
       </main>
       <Footer />      
     </div>
