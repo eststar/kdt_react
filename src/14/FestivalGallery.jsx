@@ -1,6 +1,4 @@
-import TailButton from "../components/TailButton";
 import TailCard from "../components/TailCard"
-import TailInput from "../components/TailInput";
 
 import { useState, useEffect, useRef } from "react"
 
@@ -41,24 +39,22 @@ export default function TourGallery() {
 
     //최초 생성시 전체 데이터 일단 받아옴
     useEffect(() => {
-        getFetchData();        
+        getFetchData();
     }, []);
 
     //받아올 데이터 수 결정 되었으면 다시 fetch
     useEffect(() => {
         if (!numRows || !data || data.length <= 0)
             return;
-        getFetchData();      
+        getFetchData();
     }, [numRows]);
 
-    const handleChange =(e)=>{
-        
+    const handleChange =()=>{
         //어차피 pData 없으면 다른 선택 메뉴 없음
         if(districtRef.current.value === "waitSelect"){
             setCardTags([]);
             return;
-        }       
-
+        }
         const filteredData = pData.filter((item) => item.GUGUN_NM.includes(districtRef.current.value));        
         setCardTags(filteredData.map((item) => <TailCard url={item.MAIN_IMG_THUMB} title={item.TITLE}
             subtitle={item.TRFC_INFO} infos={item.USAGE_DAY_WEEK_AND_TIME} key={item.UC_SEQ} />));
