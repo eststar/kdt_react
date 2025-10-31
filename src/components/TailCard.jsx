@@ -1,5 +1,3 @@
-// import Market from "../assets/market/market.png"
-
 export default function TailCard({url, title, subtitle, infos }) {
   const data =infos.split(",");  
 
@@ -9,7 +7,7 @@ export default function TailCard({url, title, subtitle, infos }) {
     return (data.map((el) => <div key={el.replaceAll(" ", "")}
       className="py-1 px-2 rounded-2xl bg-gray-200">{el.trim()}</div>))
   };
-  
+
   return (
     <div className="max-w-sm shadow-xl/30 flex flex-col">
       <img src={url} alt="" className="w-full" />
