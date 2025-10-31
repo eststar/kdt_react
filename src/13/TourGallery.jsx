@@ -96,7 +96,7 @@ export default function TourGallery() {
             <div className="w-4/5 h-3/4 overflow-y-auto grid grid-cols-3 md:grid-cols-2 lg:grid-cols-3 gap-5 items-start">
                 {/* {cardTags} */}
                 {pData.map((item) => <TailCard url={item.galWebImageUrl} title={item.galTitle} 
-                    subtitle={item.galPhotographyLocation} infos={item.galSearchKeyword.split(",")} key={item.galContentId} />)}            
+                    subtitle={item.galPhotographyLocation} infos={item.galSearchKeyword} key={item.galContentId} />)}            
             </div>            
         </div>
     )

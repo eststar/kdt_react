@@ -1,16 +1,15 @@
 // import Market from "../assets/market/market.png"
 
 export default function TailCard({url, title, subtitle, infos }) {
-  // console.log(data.galSearchKeyword.split(","));  
+  const data =infos.split(",");  
 
   const keyTags = () => {
-    if (!infos || infos.length <=0)
+    if (!infos || data.length <=0)
       return;
-    return (infos.map((el) => <div key={el.replaceAll(" ", "")}
+    return (data.map((el) => <div key={el.replaceAll(" ", "")}
       className="py-1 px-2 rounded-2xl bg-gray-200">{el.trim()}</div>))
   };
-
-
+  
   return (
     <div className="max-w-sm shadow-xl/30 flex flex-col">
       <img src={url} alt="" className="w-full" />
