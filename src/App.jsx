@@ -19,7 +19,7 @@ import RouteMain from './15/RouteMain'
 import RouteHome from './15/RouteHome'
 import RoutePage1 from './15/RoutePage1'
 import RoutePage2 from './15/RoutePage2'
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, BrowserRouter } from "react-router-dom"
 
 function App() {
   return (
@@ -27,11 +27,13 @@ function App() {
       <Header />
       <main className='container mx-auto flex flex-col flex-grow overflow-y-auto'>
         <RouteMain />
-        <Routes>
-          <Route path="/" element={<RouteHome />} />
-          <Route path="/p1/:itme1/:item2" element={<RoutePage1 />} />
-          <Route path="/p2" element={<RoutePage2 />} />
-        </Routes>
+        {/* <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<RouteHome />} />
+            <Route path="/p1/:itme1/:item2" element={<RoutePage1 />} />
+            <Route path="/p2" element={<RoutePage2 />} />
+          </Routes>
+        </BrowserRouter> */}
       </main>
       <Footer />
     </div>
