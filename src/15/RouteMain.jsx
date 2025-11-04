@@ -10,11 +10,11 @@ export default function RouteMain() {
     <BrowserRouter>
       <div className="w-full flex flex-col justify-center items-center">
         <RouteNav />
-        {/* <Routes>
+        <Routes>
           <Route path="/" element={<RouteHome />} />
           <Route path="/p1/:itme1/:item2" element={<RoutePage1 />} />
           <Route path="/p2" element={<RoutePage2 />} />
-        </Routes> */}
+        </Routes>
       </div>
     </BrowserRouter>
   )

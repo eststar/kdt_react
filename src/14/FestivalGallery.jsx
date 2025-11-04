@@ -1,9 +1,17 @@
 import TailCard from "../components/TailCard"
+import FestivalContents from "./FestivalContents";
 
 import { useState, useEffect, useRef } from "react"
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 
 const apiKey = import.meta.env.VITE_PUBLICDATA_API_KEY;
 export default function TourGallery() {
+    // const curDistrict = useLocation();
+    // const prevDistrict = (curDistrict)? curDistrict.state.district: "";
+    // console.log(curDistrict.state.district)
+    const [ queryDistrict ] = useSearchParams();
+    const prevDistrict = queryDistrict.get("curDistrict");
+
     //fetch해서 받아올 전체 데이터    
     const [data, setData] = useState();
      //받아올 축제 데이터 총개수. 시작시 하나만 받아와서 전체 데이터 개수 정보 알아옴
@@ -14,7 +22,7 @@ export default function TourGallery() {
     //카드 출력용
     const [cardTags, setCardTags] = useState([]);
     //선택 단어
-    const districtRef = useRef("waitSelect");
+    const districtRef = useRef(/* prevDistrict() ?? "waitSelect" */);
 
     //기본 키없고, 불러올 데이터행 숫자 설정 없는 url
     const baseUrl = "https://apis.data.go.kr/6260000/FestivalService/getFestivalKr"
@@ -23,7 +31,6 @@ export default function TourGallery() {
     //fetch 함수
     const getFetchData = async () => {
         const url = `${baseUrl}&numOfRows=${numRows ?? 1}&serviceKey=${apiKey}`;
-        
         try {
             const resp = await fetch(url);
             const data = await resp.json();
@@ -49,6 +56,22 @@ export default function TourGallery() {
         getFetchData();
     }, [numRows]);
 
+    useEffect(()=>{
+        
+        if(prevDistrict && prevDistrict !== "waitSelect"){
+            districtRef.current.value = prevDistrict;
+            
+            const filteredData = pData.filter((item) => item.GUGUN_NM.includes(districtRef.current.value));        
+            setCardTags(filteredData.map((item, idx) => 
+            <Link to="/FestivalGallery/Contents" state={{contents:item}} key={item.UC_SEQ + idx}>
+                <TailCard url={item.MAIN_IMG_THUMB} title={item.TITLE}
+                    subtitle={item.TRFC_INFO} infos={item.USAGE_DAY_WEEK_AND_TIME} key={item.UC_SEQ} />
+            </Link>));
+        }
+        
+    },[data]);
+
+    //카드 생성
     const handleChange =()=>{
         //어차피 pData 없으면 다른 선택 메뉴 없음
         if(districtRef.current.value === "waitSelect"){
@@ -56,16 +79,20 @@ export default function TourGallery() {
             return;
         }
         const filteredData = pData.filter((item) => item.GUGUN_NM.includes(districtRef.current.value));        
-        setCardTags(filteredData.map((item) => <TailCard url={item.MAIN_IMG_THUMB} title={item.TITLE}
-            subtitle={item.TRFC_INFO} infos={item.USAGE_DAY_WEEK_AND_TIME} key={item.UC_SEQ} />));
+        setCardTags(filteredData.map((item, idx) => 
+            <Link to="/FestivalGallery/Contents" state={{contents:item}} key={item.UC_SEQ + idx}>
+                <TailCard url={item.MAIN_IMG_THUMB} title={item.TITLE}
+                    subtitle={item.TRFC_INFO} infos={item.USAGE_DAY_WEEK_AND_TIME} key={item.UC_SEQ} />
+            </Link>));
     };
 
+    //지역구 선택했는데 아직 fetch 안됨
     const handleClick = (e)=>{
         e.preventDefault();
         if(!pData || pData.length <= 0)
             alert("데이터 받는중...");
     };
-
+    //지역구 선택 확장 메뉴
     const makeSelectBox = ()=>{        
         if(!pData || pData.length <= 0)
             return;

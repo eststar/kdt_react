@@ -15,9 +15,10 @@ export default function BoxOffice() {
     const getYesterday = () => {
         const date = new Date();
         let year = date.getFullYear();
-        let month = date.getMonth() + 1;
-        let day = date.getDate();
-        return `${year}-${month}-${day - 1}`;
+        let month = (date.getMonth() + 1).toString().padStart(2, '0');
+        let day = (date.getDate()-1).toString().padStart(2, '0');
+        
+        return `${year}-${month}-${day}`;
     };
     //const [selDate, setSelDate] = useState(getYesterday());
 
@@ -47,7 +48,7 @@ export default function BoxOffice() {
     //사용하지 않으면 다음거 실행하고 있음.
     const getFetchData = async (day) => {
         let url = `${baseUrl}key=${apiKey}&targetDt=${day}`;        
-
+        
         const resp = await fetch(url);
         const data = await resp.json();
         setMovieData(data.boxOfficeResult.dailyBoxOfficeList);

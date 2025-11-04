@@ -1,7 +1,5 @@
-import React from 'react'
 import { FcAlarmClock } from "react-icons/fc";
 import ClockImg from '/clock.png';
-
 
 export default function MyClockImge() {
   return (

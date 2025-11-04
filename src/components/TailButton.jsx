@@ -15,6 +15,10 @@ const btStyles = {
     base: "bg-orange-500",
     hover: "hover:bg-orange-900"
   },
+  yellow: {
+    base: "bg-yellow-500",
+    hover: "hover:bg-yellow-900"
+  },
 };
 
 export default function TailButton({ bColor, caption, onHandle }) { 

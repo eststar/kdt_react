@@ -14,28 +14,31 @@ import MyRef from './11/MyRef'
 import RefCalc from './12/RefCalc'
 import TourGallery from './13/TourGallery'
 import FestivalGallery from './14/FestivalGallery'
-import RouteMain from './15/RouteMain'
+import FestivalContents from './14/FestivalContents'
+import ChargerInfo from './16/ChargerInfo'
 
-import RouteHome from './15/RouteHome'
-import RoutePage1 from './15/RoutePage1'
-import RoutePage2 from './15/RoutePage2'
 import { Routes, Route, BrowserRouter } from "react-router-dom"
 
 function App() {
   return (
     <div className='w-full h-screen flex flex-col overflow-y-hidden'>
-      <Header />
-      <main className='container mx-auto flex flex-col flex-grow overflow-y-auto'>
-        <RouteMain />
-        {/* <BrowserRouter>
+      <BrowserRouter>
+        <Header />
+        <main className='container mx-auto flex flex-col flex-grow overflow-y-auto'>
           <Routes>
-            <Route path="/" element={<RouteHome />} />
-            <Route path="/p1/:itme1/:item2" element={<RoutePage1 />} />
-            <Route path="/p2" element={<RoutePage2 />} />
+            <Route path="/" element={<MyClock />}></Route>
+            <Route path="/lotto" element={<Lotto />}></Route>
+            <Route path="/Food" element={<FoodMain />}></Route>
+            <Route path="/BoxOffice" element={<BoxOffice />}></Route>
+            <Route path="/Traffic" element={<Traffic />}></Route>
+            <Route path="/TourGallery" element={<TourGallery />}></Route>
+            <Route path="/FestivalGallery" element={<FestivalGallery />}></Route>
+            <Route path="/FestivalGallery/Contents" element={<FestivalContents />}></Route>
+            <Route path="/ChargerInfo" element={<ChargerInfo />}></Route>
           </Routes>
-        </BrowserRouter> */}
-      </main>
-      <Footer />
+        </main>
+        <Footer />
+      </BrowserRouter>
     </div>
   )
 }
