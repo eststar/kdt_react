@@ -1,15 +1,19 @@
-export default function TailSelect({caption, data, onhandle}) {
-    // const keys = Object.keys(data);
-    // const values = Object.values(data);
-    const makeOptions = data.map((el)=>
-            <option key={el} value={el}>{el}</option>
-        );
+import { useRef } from "react";
+
+export default function TailSelect({ id, ref, caption, keyData, valData, onhandle }) {
+
+  const makeOptions = valData == "" ? "" : valData.map((el, idx) =>
+    <option key={el} value={keyData[idx]}>{el}</option>
+  );
+
   return (
-    <div className="grid-rows-2 border-2 border-solid border-b-cyan-700 rounded">
-        <div>{caption}</div>
-        <select className="bg-white">
-            {makeOptions}
-        </select>
+    <div className="grid-rows-2 border-2 border-solid border-b-cyan-700 rounded p-2">
+      <label htmlFor={id}>{caption}</label>
+      <select id={id} ref={ref} onChange={onhandle}
+              className="w-full rounded bg-white border-2 border-solid border-rose-400">
+        <option value="">--선택--</option>
+        {makeOptions}
+      </select>
     </div>
   )
 }
