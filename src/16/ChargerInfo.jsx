@@ -1,8 +1,10 @@
 import TailButton from "../components/TailButton";
 import TailSelect from "../components/TailSelect";
 import DataCard from "./DataCard";
+import NameCard from "./NameCard";
 
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 import BusId from "./data/busid.json";
 import ChgerType from "./data/chgertype.json";
@@ -116,16 +118,21 @@ export default function ChargerInfo() {
         const countCards = Object.keys(Stat).map((item)=>
             <DataCard key={item} title={Stat[item]} number={cData.filter((el)=> el.stat == item).length}/>
         );
-        const locCards = cData.map(()=>{});
+        
+        const locCards = cData.map((el,idx)=>
+            <Link to={"/ChargerInfo/Info"} state={{info:el}} key={el.statId+idx}>
+                <NameCard key={el.statId} title={el.statNm} num={el.chgerId} onhandle={()=>{}}/>
+            </Link>
+        );
         
         setContents(
             <div className="w-full flex flex-col">
-                <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-2">
+                <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-7 gap-2 mb-5">
                     <DataCard title="충전소수" number={data.totalCount}/>
                     {countCards}
                 </div>
                 <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-2">
-
+                    {locCards}
                 </div>
             </div>
         );

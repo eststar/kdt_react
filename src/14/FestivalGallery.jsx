@@ -1,5 +1,5 @@
 import TailCard from "../components/TailCard"
-import FestivalContents from "./FestivalContents";
+// import FestivalContents from "./FestivalContents";
 
 import { useState, useEffect, useRef } from "react"
 import { Link, useLocation, useSearchParams } from "react-router-dom";
@@ -31,6 +31,8 @@ export default function TourGallery() {
     //fetch 함수
     const getFetchData = async () => {
         const url = `${baseUrl}&numOfRows=${numRows ?? 1}&serviceKey=${apiKey}`;
+        console.log(url);
+        
         try {
             const resp = await fetch(url);
             const data = await resp.json();

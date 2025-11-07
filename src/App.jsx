@@ -16,6 +16,10 @@ import TourGallery from './13/TourGallery'
 import FestivalGallery from './14/FestivalGallery'
 import FestivalContents from './14/FestivalContents'
 import ChargerInfo from './16/ChargerInfo'
+import TailInfoCard from './components/TailInfoCard'
+import JotaiCnt from './17/JotaiCnt'
+import FestivalGallery2 from './14_2/FestivalGallery2'
+import FestivalContents2 from './14_2/FestivalContents2'
 
 import { Routes, Route, BrowserRouter } from "react-router-dom"
 
@@ -34,7 +38,11 @@ function App() {
             <Route path="/TourGallery" element={<TourGallery />}></Route>
             <Route path="/FestivalGallery" element={<FestivalGallery />}></Route>
             <Route path="/FestivalGallery/Contents" element={<FestivalContents />}></Route>
+            <Route path="/FestivalGallery2" element={<FestivalGallery2 />}></Route>
+            <Route path="/FestivalGallery2/Contents" element={<FestivalContents2 />}></Route>
             <Route path="/ChargerInfo" element={<ChargerInfo />}></Route>
+            <Route path="/ChargerInfo/Info" element={<TailInfoCard />}></Route>
+            <Route path="/JotaiCnt" element={<JotaiCnt />}></Route>
           </Routes>
         </main>
         <Footer />
