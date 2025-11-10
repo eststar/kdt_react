@@ -24,8 +24,10 @@ export default function Header() {
                         <Link to="/FestivalGallery2">부산 축제 정보(Atom)</Link></li>
                     <li className='hover:text-lg font-bold cursor-pointer'>
                         <Link to="/ChargerInfo">전기차 충전소 정보</Link></li>
+                    {/* <li className='hover:text-lg font-bold cursor-pointer'>
+                        <Link to="/JotaiCnt">전역 상태 관리</Link></li> */}
                     <li className='hover:text-lg font-bold cursor-pointer'>
-                        <Link to="/JotaiCnt">전역 상태 관리</Link></li>
+                        <Link to="/TodoList">할 일 목록</Link></li>
                 </ul>
             </nav>
         </header>

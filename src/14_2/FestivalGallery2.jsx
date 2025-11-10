@@ -15,35 +15,17 @@ export default function festival() {
         </Suspense>
     )
 }
-// const apiKey = import.meta.env.VITE_PUBLICDATA_API_KEY;
+
 export function FestivalGallery2() {
     const data = useAtomValue(festivalFetchData);
+    const [selDistrict, setSelDistrict] = useAtom(selDistrictAtom);
 
-    // const [queryDistrict] = useSearchParams();
-    // const prevDistrict = queryDistrict.get("curDistrict");
-    
     //축제 정보    
     const [pData, setPData] = useState([]);
     //카드 출력용
     const [cardTags, setCardTags] = useState([]);
     //선택 단어
-    const districtRef = useRef(/* prevDistrict() ?? "waitSelect" */);
-
-    //fetch 함수
-    // const getFetchData = async () => {
-        // const apiKey = import.meta.env.VITE_PUBLICDATA_API_KEY;
-    //     //기본 키없고, 불러올 데이터행 숫자 설정 없는 url
-    //     const baseUrl = "https://apis.data.go.kr/6260000/FestivalService/getFestivalKr"
-    //         + "?resultType=json";
-    //     const url = `${baseUrl}&serviceKey=${apiKey}`;
-    //     try {
-    //         const resp = await fetch(url);
-    //         const data = await resp.json();
-    //         setPData(data.getFestivalKr.item);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
+    const districtRef = useRef(selDistrict ?? "waitSelect");
 
     //최초 생성시 전체 데이터 일단 받아옴
     useEffect(() => {
@@ -52,16 +34,13 @@ export function FestivalGallery2() {
     }, []);
 
     useEffect(() => {
-        // if (prevDistrict && prevDistrict !== "waitSelect") {
-        //     districtRef.current.value = prevDistrict;
-
-            const filteredData = pData.filter((item) => item.GUGUN_NM.includes(districtRef.current.value));
-            setCardTags(filteredData.map((item, idx) =>
-                <Link to="/FestivalGallery2/Contents" state={{ contents: item }} key={item.UC_SEQ + idx}>
-                    <TailCard url={item.MAIN_IMG_THUMB} title={item.TITLE}
-                        subtitle={item.TRFC_INFO} infos={item.USAGE_DAY_WEEK_AND_TIME} key={item.UC_SEQ} />
-                </Link>));
-        // }
+        const filteredData = pData.filter((item) => item.GUGUN_NM.includes(districtRef.current.value));
+        setCardTags(filteredData.map((item, idx) =>
+            <Link to="/FestivalGallery2/Contents" state={{ contents: item }} key={item.UC_SEQ + idx}>
+                <TailCard url={item.MAIN_IMG_THUMB} title={item.TITLE}
+                    subtitle={item.TRFC_INFO} infos={item.USAGE_DAY_WEEK_AND_TIME} key={item.UC_SEQ} />
+            </Link>));
+        
     }, [pData]);
 
     //카드 생성
@@ -71,6 +50,7 @@ export function FestivalGallery2() {
             setCardTags([]);
             return;
         }
+        setSelDistrict(districtRef.current.value);
         const filteredData = pData.filter((item) => item.GUGUN_NM.includes(districtRef.current.value));
         setCardTags(filteredData.map((item, idx) =>
             <Link to="/FestivalGallery2/Contents" state={{ contents: item }} key={item.UC_SEQ + idx}>

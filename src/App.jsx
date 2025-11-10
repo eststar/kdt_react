@@ -20,6 +20,7 @@ import TailInfoCard from './components/TailInfoCard'
 import JotaiCnt from './17/JotaiCnt'
 import FestivalGallery2 from './14_2/FestivalGallery2'
 import FestivalContents2 from './14_2/FestivalContents2'
+import TodoList from './18/TodoList'
 
 import { Routes, Route, BrowserRouter } from "react-router-dom"
 
@@ -42,7 +43,8 @@ function App() {
             <Route path="/FestivalGallery2/Contents" element={<FestivalContents2 />}></Route>
             <Route path="/ChargerInfo" element={<ChargerInfo />}></Route>
             <Route path="/ChargerInfo/Info" element={<TailInfoCard />}></Route>
-            <Route path="/JotaiCnt" element={<JotaiCnt />}></Route>
+            {/* <Route path="/JotaiCnt" element={<JotaiCnt />}></Route> */}
+            <Route path='/TodoList' element={<TodoList />}></Route>
           </Routes>
         </main>
         <Footer />
