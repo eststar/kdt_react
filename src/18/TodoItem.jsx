@@ -28,7 +28,7 @@ export default function TodoItem({ data }) {
                 {isEdit ? <input className="flex-1 border-2 border-fuchsia-300 border-solid p-2 rounded focus:bg-amber-200"
                     type="text" value={editingTxt} 
                     onChange={(e) => setEditingTxt(e.target.value)} />
-                    : <label htmlFor={data.id} className="flex justify-center items-center">{data.text}</label>
+                    : <label htmlFor={data.id} className={`flex justify-center items-center ${ data.completed ? "line-through": ""}`}>{data.text}</label>
                 }
             </div>
             <div className="w-full col-span-2 grid grid-rows-1 grid-cols-2 gap-2">
