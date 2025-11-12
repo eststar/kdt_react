@@ -15,14 +15,7 @@ export default function () {
     const [todoList, setTodoList] = useState();
     const [todoCnt, setTodoCnt] = useState(todo.length);    
     
-    // useEffect(()=>{
-    //     setTodoList(
-    //         todo.map((item)=>
-    //             <TodoItem id={item.id} name={item.text} key={item.id} />
-    //         )
-    //     );
-    // },[]);
-    
+    //jotai atom변수 바뀌면 어차피 새로 갱신되서 useeffect 사용할 필요 없었음
     useEffect(()=>{
         setTodoList(
             todo.map((item)=>

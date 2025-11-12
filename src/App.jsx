@@ -20,7 +20,7 @@ import TailInfoCard from './components/TailInfoCard'
 import JotaiCnt from './17/JotaiCnt'
 import FestivalGallery2 from './14_2/FestivalGallery2'
 import FestivalContents2 from './14_2/FestivalContents2'
-import TodoList from './18/TodoList'
+import TodoList from './18_1/TodoList'
 
 import { Routes, Route, BrowserRouter } from "react-router-dom"
 
