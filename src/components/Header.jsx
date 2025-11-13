@@ -28,6 +28,8 @@ export default function Header() {
                         <Link to="/JotaiCnt">전역 상태 관리</Link></li> */}
                     <li className='hover:text-lg font-bold cursor-pointer'>
                         <Link to="/TodoList">할 일 목록</Link></li>
+                    <li className='hover:text-lg font-bold cursor-pointer'>
+                        <Link to="/SubwayAir">지하철 공기질</Link></li>
                 </ul>
             </nav>
         </header>

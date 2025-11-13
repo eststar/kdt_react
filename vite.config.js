@@ -12,6 +12,12 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: path => path.replace(/^\/photo-api/, '/B551011/PhotoGalleryService1'),
         secure: false,
+      },
+      '/stationAir-api': {
+        target: 'https://apis.data.go.kr',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/stationAir-api/, '/6260000/IndoorAirQuality/getIndoorAirQualityByStation'),
+        secure: false,
       }
     }
   }

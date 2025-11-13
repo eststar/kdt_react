@@ -7,7 +7,7 @@ export default function TailSelect({ id, ref, caption, keyData, valData, onhandl
   );
 
   return (
-    <div className="grid-rows-2 border-2 border-solid border-b-cyan-700 rounded p-2">
+    <div className="grid-rows-2 p-2">
       <label htmlFor={id}>{caption}</label>
       <select id={id} ref={ref} onChange={onhandle}
               className="w-full rounded bg-white border-2 border-solid border-rose-400">
