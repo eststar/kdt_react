@@ -14,7 +14,7 @@ export default function SubwayAir() {
 
   let targetDate = getDate().replaceAll("-", ""); //`${curDate.getFullYear()}${curDate.getMonth() + 1}${curDate.getDate()}`;
   
-  // targetDate = `20251113`;
+  targetDate = `20251113`;
 
   const areaKeys = Sarea.map(item => item["코드"]);
   const areaNames = Sarea.map(item => item["측정소"]);
@@ -23,10 +23,9 @@ export default function SubwayAir() {
   const [subwayBoxes, setSubwayBoxes] = useState();
   const dateRef = useRef(targetDate);
 
-  const changeDate = (e) => {
-    targetDate = e.target.value.replaceAll("-", "");
-    console.log(targetDate);
-  };
+  // const changeDate = (e) => {
+  //   targetDate = e.target.value.replaceAll("-", "");    
+  // };
 
   const getFetchData = async () => {
     const baseURL = `/stationAir-api?&resultType=json&pageNo=1&numOfRows=50`;
@@ -44,10 +43,10 @@ export default function SubwayAir() {
   };
 
   const handleSelect = () => {
-    if (!dateRef.current.value || dateRef.current.value.length != 10) {
-      alert("날짜 설정 오류");
-      return;
-    }
+    // if (!dateRef.current.value || dateRef.current.value.length != 10) {
+    //   alert("날짜 설정 오류");
+    //   return;
+    // }
     getFetchData();
   };
 
@@ -55,7 +54,7 @@ export default function SubwayAir() {
     if (!sdata)
       return;
     setSubwayBoxes(sdata.map((item, idx) =>
-      <SubwayBox data={item} colorIdx={idx} key={item.controlnumber} />
+      <SubwayBox data={item} colorIdx={idx} key={item.controlnumber+idx} />
     ));
   }, [sdata]);
 
@@ -63,11 +62,11 @@ export default function SubwayAir() {
     <div className="m-5 flex flex-col ">
       <div className="w-full flex flex-row items-center">
         <h1 className="flex-1 text-3xl font-bold text-center">측정소 선택</h1>
-        <div className="flex-1 ">
+        {/* <div className="flex-1 ">
           <label htmlFor="selDate"></label>
-          <input type="date" id="selDate" ref={dateRef} max={getDate()} /* value={getDate()} */ onChange={changeDate}
+          <input type="date" id="selDate" ref={dateRef} max={getDate()} value={getDate()} onChange={changeDate}
             className="border-1 border-solid border-b-blue-600 p-2 rounded" />
-        </div>
+        </div> */}
         <div className="flex-1 ">
           <TailSelect caption="측정소 선택" id="" keyData={areaKeys} valData={areaNames} ref={areaRef} onhandle={handleSelect} />
         </div>
