@@ -19,7 +19,7 @@ import { useState, useEffect, useRef } from "react"
 const apiKey = import.meta.env.VITE_PUBLICDATA_API_KEY;
 export default function TourGallery() {
     // /photo-api -> https://apis.data.go.kr/B551011/PhotoGalleryService1/gallerySearchList1
-    const baseUrl = "/photo-api/gallerySearchList1"
+    const baseUrl = "/dataApi/B551011/PhotoGalleryService1/gallerySearchList1"
         + "?numOfRows=50&pageNo=1&MobileOS=ETC&MobileApp=AppTest&arrange=A"
         + "&_type=json";
 

@@ -7,16 +7,16 @@ export default defineConfig({
   plugins: [react(), tailwind(),],
   server: {
     proxy: {
-      '/photo-api': {
+      '/dataApi': {
         target: 'https://apis.data.go.kr',
         changeOrigin: true,
-        rewrite: path => path.replace(/^\/photo-api/, '/B551011/PhotoGalleryService1'),
+        rewrite: path => path.replace(/^\/dataApi/, ''),
         secure: false,
       },
-      '/stationAir-api': {
-        target: 'https://apis.data.go.kr',
+      '/kobisopenapi': {
+        target: 'https://kobis.or.kr/kobisopenapi',
         changeOrigin: true,
-        rewrite: path => path.replace(/^\/stationAir-api/, '/6260000/IndoorAirQuality/getIndoorAirQualityByStation'),
+        rewrite: path => path.replace(/^\/kobisopenapi/, ''),
         secure: false,
       }
     }

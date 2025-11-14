@@ -8,7 +8,7 @@ export default function BoxOffice() {
     const [trTags, setTrTags] = useState();
     const [movieInfo, setMovieInfo] = useState();    
 
-    const baseUrl = "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?";
+    const baseUrl = "/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?";
 
     //처음 생성시 어제 날짜 받아오기    
     //어제 날짜 연월일    

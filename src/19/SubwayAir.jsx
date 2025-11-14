@@ -28,7 +28,7 @@ export default function SubwayAir() {
   // };
 
   const getFetchData = async () => {
-    const baseURL = `/stationAir-api?&resultType=json&pageNo=1&numOfRows=50`;
+    const baseURL = `/dataApi/6260000/IndoorAirQuality/getIndoorAirQualityByStation?&resultType=json&pageNo=1&numOfRows=50`;
     const url = `${baseURL}&serviceKey=${api}&controlnumber=${targetDate}&areaIndex=${areaRef.current.value}`;
     try {
       const resp = await fetch(url);
