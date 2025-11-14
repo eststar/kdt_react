@@ -86,7 +86,7 @@ export default function ChargerInfo() {
             `&serviceKey=${apiKey}`+
             `&zcode=${cityRef.current.value}&zscode=${districtRef.current.value}`+
             `&kind=${kindRef.current.value}&kindDetail=${detailRef.current.value}`;
-        // console.log(url);
+        
         setIsLoading(true);
         try {
             const resp = await fetch(url);

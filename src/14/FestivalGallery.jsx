@@ -31,7 +31,6 @@ export default function TourGallery() {
     //fetch 함수
     const getFetchData = async () => {
         const url = `${baseUrl}&numOfRows=${numRows ?? 1}&serviceKey=${apiKey}`;
-        console.log(url);
         
         try {
             const resp = await fetch(url);
