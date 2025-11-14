@@ -82,7 +82,7 @@ export default function ChargerInfo() {
     };
 
     const getFetchData = async ()=>{
-        const url = "http://apis.data.go.kr/B552584/EvCharger/getChargerInfo?&numOfRows=10&pageNo=1&dataType=JSON"+
+        const url = "/dataApi/B552584/EvCharger/getChargerInfo?&numOfRows=10&pageNo=1&dataType=JSON"+
             `&serviceKey=${apiKey}`+
             `&zcode=${cityRef.current.value}&zscode=${districtRef.current.value}`+
             `&kind=${kindRef.current.value}&kindDetail=${detailRef.current.value}`;
