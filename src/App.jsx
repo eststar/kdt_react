@@ -22,6 +22,7 @@ import FestivalGallery2 from './14_2/FestivalGallery2'
 import FestivalContents2 from './14_2/FestivalContents2'
 import TodoList from './18_3/TodoList'
 import SubwayAir from './19/SubwayAir'
+import Login from './20/Login'
 
 import { Routes, Route, BrowserRouter } from "react-router-dom"
 
@@ -31,8 +32,8 @@ function App() {
       <BrowserRouter>
         <Header />
         <main className='container mx-auto flex flex-col flex-grow overflow-y-auto'>
-          <Routes>
-            <Route path="/" element={<MyClock />}></Route>
+          <Routes>            
+            <Route path="/Clock" element={<MyClock />}></Route>
             <Route path="/lotto" element={<Lotto />}></Route>
             <Route path="/Food" element={<FoodMain />}></Route>
             <Route path="/BoxOffice" element={<BoxOffice />}></Route>
@@ -44,9 +45,9 @@ function App() {
             <Route path="/FestivalGallery2/Contents" element={<FestivalContents2 />}></Route>
             <Route path="/ChargerInfo" element={<ChargerInfo />}></Route>
             <Route path="/ChargerInfo/Info" element={<TailInfoCard />}></Route>
-            {/* <Route path="/JotaiCnt" element={<JotaiCnt />}></Route> */}
             <Route path='/TodoList' element={<TodoList />}></Route>
             <Route path='/SubwayAir' element={<SubwayAir />}></Route>
+            <Route path="/" element={<Login />}></Route>
           </Routes>
         </main>
         <Footer />
