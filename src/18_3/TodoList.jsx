@@ -76,7 +76,7 @@ export default function () {
 
         setTodoList(
             todos.map((item) =>
-                <TodoItem key={item.id} data={todos} curData={item} handleEdit={patchTodo} handleDelete={deleteTodo} />)
+                <TodoItem key={item.id} curData={item} handleEdit={patchTodo} handleDelete={deleteTodo} />)
         );
     }, [todos]);
 
